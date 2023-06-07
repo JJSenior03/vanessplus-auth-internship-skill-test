@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import "firebase/compat/firestore";
@@ -7,7 +6,6 @@ import UserDataDisplay from "../components/UserDataDisplay";
 
 const Home: React.FC = () => {
   const [userData, setUserData] = useState<any>(null);
-  const navigate = useNavigate();
 
   const fetchUserData = async (userId: string) => {
     const db = firebase.firestore();
@@ -27,26 +25,15 @@ const Home: React.FC = () => {
     }
   }, []);
 
-  const handleLogout = async () => {
-    try {
-      await firebase.auth().signOut();
-      navigate("/");
-    } catch (error) {
-      console.log("Error signing out:", error);
-    }
-  };
-
   return (
-    <div>
-      <h2>Home</h2>
+    <div className="flex flex-col items-center justify-center pt-12">
       {userData ? (
-        <div>
+        <div className="shadow p-4 rounded-lg mb-4">
           <UserDataDisplay userData={userData} />
         </div>
       ) : (
-        <p>Loading...</p>
+        <p className="text-gray-500 p-4">Loading...</p>
       )}
-      <button onClick={handleLogout}>Logout</button>
     </div>
   );
 };

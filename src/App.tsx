@@ -8,6 +8,8 @@ import Register from "./pages/Register";
 import Home from "./pages/Home";
 import ForgotPassword from "./pages/ForgotPassword";
 import "./App.css";
+import NavBar from "./components/NavBar";
+
 
 firebase.initializeApp(firebaseConfig);
 
@@ -15,6 +17,7 @@ const App: React.FC = () => {
   return (
     <div className="App">
       <Router>
+        <NavBar />
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/login" element={<Login />} />
